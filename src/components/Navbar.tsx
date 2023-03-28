@@ -3,6 +3,7 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import {AiOutlineShoppingCart} from "react-icons/ai";
+import { useShoppingCart } from "@/context/ShoppingCartContext";
 
 function Navbar() {
 
@@ -20,6 +21,8 @@ const NAV_LINKS = [
         href: "/about",
     },
 ]
+
+    const {cartQuantity, openCart} = useShoppingCart()
     return (
         <Box 
         >
@@ -50,33 +53,43 @@ const NAV_LINKS = [
                     }
                 </Flex>
                 <Flex>
-                    <Box
-                        bg="blue"
-                        width="50px"
-                        height="50px"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        rounded="50%"
-                        flexDirection="column"
-                    >
-                            <AiOutlineShoppingCart color="white" fontSize="20px"/>
-                    </Box>
-                    <Box
-                        width="25px"
-                        height="25px"
-                        rounded="50%"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        ml="-10px"
-                        bg="red"
-                        color="white"
-                        mt="30px"
-                        
-                    >
-                        1
-                    </Box>
+                    <Link passHref href="/cart">
+                        <Box
+                            bg="blue"
+                            width="50px"
+                            height="50px"
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            rounded="50%"
+                            flexDirection="column"
+                            onClick={openCart}
+                        >
+                                <AiOutlineShoppingCart color="white" fontSize="20px"/>
+                        </Box>
+                    </Link>
+                    {
+                        cartQuantity > 0 ? (
+                        <Box
+                            width="25px"
+                            height="25px"
+                            rounded="50%"
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            ml="-10px"
+                            bg="red"
+                            color="white"
+                            mt="30px"
+                            
+                        >
+                            {cartQuantity}
+                        </Box>
+                        ):(
+                            <Box></Box>
+                        )
+                    }
+
                 </Flex>
             </Flex>
             </MaxWidthWrapper>

@@ -1,8 +1,9 @@
 import React from "react";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Box, Image, Flex, Text } from "@chakra-ui/react"
+import { useShoppingCart } from "@/context/ShoppingCartContext";
 
-interface StoreItemProps  {
+type StoreItemProps = {
     id: number;
     name: string;
     price: number;
@@ -10,14 +11,20 @@ interface StoreItemProps  {
 }
 
 
-function StoreItem(props: StoreItemProps) {
-    const quantity = 0;
+function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
+    
+    const {
+        getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity,
+        removeFromCart,
+        }  = useShoppingCart()
+
+
+    const quantity = getItemQuantity(id);
     return (
         <Box>
             <MaxWidthWrapper>
-                {
-
-                }
                 <Box
                     display="flex"
                     // alignItems="center"
@@ -30,7 +37,7 @@ function StoreItem(props: StoreItemProps) {
                         width="100%"
                         height="200px"
                     >
-                        <Image src={props.imgUrl} width='100%' height="100%" alt="img" />
+                        <Image src={imgUrl} width='100%' height="100%" alt="img" />
                     </Box>
                     <Flex
                         justifyContent="space-between"
@@ -39,8 +46,8 @@ function StoreItem(props: StoreItemProps) {
                         fontSize="25px"
                         fontWeight="bold"
                     >
-                        <Text>{props.name}</Text>
-                        <Text>{props.price}</Text>
+                        <Text>{name}</Text>
+                        <Text>{price}</Text>
                     </Flex>
 
                     {
@@ -60,6 +67,7 @@ function StoreItem(props: StoreItemProps) {
                             textAlign="center"
                             p="10px"
                             cursor="pointer"
+                            onClick={() => increaseCartQuantity(id)}
                             >
                                 + Add To Cart
                             </Box>
@@ -81,6 +89,7 @@ function StoreItem(props: StoreItemProps) {
                             bg="blue"
                             color="white"
                             cursor="pointer"
+                            onClick={() => decreaseCartQuantity(id)}
                         >
                             -
                         </Flex>
@@ -95,6 +104,7 @@ function StoreItem(props: StoreItemProps) {
                             bg="blue"
                             color="white"
                             cursor="pointer"
+                            onClick={() => increaseCartQuantity(id)}
                         >
                             +
                         </Flex>
@@ -110,7 +120,7 @@ function StoreItem(props: StoreItemProps) {
                         bg="red"
                         color="white"
                         textAlign="center"
-
+                        onClick={() => removeFromCart(id)}
                         >
                             Remove
                         </Box>
@@ -118,10 +128,6 @@ function StoreItem(props: StoreItemProps) {
                     </>
                         )
                     }
-
-
-
-
                 </Box>
             </MaxWidthWrapper>
         </Box>
