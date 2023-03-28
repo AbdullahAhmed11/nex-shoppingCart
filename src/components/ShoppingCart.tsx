@@ -27,7 +27,7 @@ function ShoppingCart({id,quantity}: CartItemProps) {
                     justifyContent="center"
                     >
                     <Image 
-                    mr="20px"
+                        mr="20px"
                         src={item?.imgUrl} 
                         width="225px" 
                         height="150px" 
@@ -43,19 +43,30 @@ function ShoppingCart({id,quantity}: CartItemProps) {
                     </Box>
                 </Flex>
                 <Flex>
+{                    item? (
                     <Text>Total Price: {item.price * quantity}</Text>
+                    ) :(
+                        null
+                    )}
                 </Flex>
                 <Flex
-                    width="25px"
-                    height="25px"
-                    alignItems="center"
-                    justifyContent="center"
-                    bg="#000"
-                    color="#fff"
-                    fontSize="25px"
-                    onClick={() =>removeFromCart(id)}
+                        alignItems="center"
+                        justifyContent="center"
                 >
+                    <Box
+                        width="25px"
+                        height="25px"
+                        bg="#000"
+                        color="#fff"
+                        fontSize="25px"
+                        onClick={() =>removeFromCart(id)}
+                        alignItems="center"
+                        justifyContent="center"
+                        display="flex"
+                    >
+
                     x
+                    </Box>
                 </Flex>
             </Flex>
 

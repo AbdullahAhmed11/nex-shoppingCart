@@ -1,7 +1,7 @@
 import ShoppingCart from "@/components/ShoppingCart";
 import React, { createContext, useContext, useState } from "react";
 import { isJsxOpeningFragment } from "typescript";
-
+import { useLocalStorage } from "../hook/useLocalStorage"
 interface ShoppingCartPrividerProps {
     children: React.ReactNode
 }
