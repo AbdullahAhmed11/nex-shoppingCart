@@ -42,7 +42,6 @@ export function ShoppingCartProvider({children}:ShoppingCartPrividerProps) {
     function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0
     }
-
     function increaseCartQuantity (id: number) {
         setCartItems(currItems => {
             if(currItems.find(item => item.id === id ) == null) {
@@ -73,7 +72,6 @@ export function ShoppingCartProvider({children}:ShoppingCartPrividerProps) {
             }
         })
     }
-
     function removeFromCart(id: number) {
         setCartItems(currItems => {
             return currItems.filter(item => item.id !==id)
